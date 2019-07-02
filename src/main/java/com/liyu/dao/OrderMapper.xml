@@ -25,6 +25,15 @@
     values (#{orderId,jdbcType=BIGINT}, #{userId,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}
       )
   </insert>
+
+  <insert id="addOrder" parameterType="com.liyu.entity.Order" >
+    insert into t_order (user_id, status
+      )
+    values (#{userId,jdbcType=INTEGER},
+            #{status,jdbcType=VARCHAR}
+    )
+  </insert>
+
   <insert id="insertSelective" parameterType="com.liyu.entity.Order" >
     insert into t_order
     <trim prefix="(" suffix=")" suffixOverrides="," >

@@ -17,9 +17,37 @@ spring:
               shardingColumn: order_id
               algorithmExpression: t_order_${order_id % 2}
           key-generator:
-            type: UUID
             column: order_id
-            props:
-              worker:
-                id: 123
-              max.tolerate.time.difference.milliseconds: 100
+            Type: SNOWFLAKE
+
+#spring:
+#  shardingsphere:
+#    datasource:
+#      names: ds0,ds1
+#      ds0:
+#        type: com.zaxxer.hikari.HikariDataSource
+#        driver-class-name: com.mysql.jdbc.Driver
+#        jdbc-url : jdbc:mysql://localhost:3306/ds_0?serverTimezone=UTC&useSSL=false&useUnicode=true&characterEncoding=UTF-8
+#        username: root
+#        password: root
+#      ds1:
+#        type: com.zaxxer.hikari.HikariDataSource
+#        driver-class-name: com.mysql.jdbc.Driver
+#        jdbc-url: jdbc:mysql://localhost:3306/ds_1?serverTimezone=UTC&useSSL=false&useUnicode=true&characterEncoding=UTF-8
+#        username: root
+#        password: root
+#    sharding:
+#      tables:
+#        t_order:
+#          actual-data-nodes: ds${0..1}.t_order_${0..1}
+#          databaseStrategy:
+#            inline:
+#              shardingColumn: user_id
+#              algorithmExpression: ds${user_id % 2}
+#          tableStrategy:
+#            inline:
+#              shardingColumn: user_id
+#              algorithmExpression: t_order_${user_id % 2}
+#          key-generator:
+#            column: order_id
+#            Type: SNOWFLAKE
